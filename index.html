@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#16263b">
+    <meta name="description" content="A student information dashboard for managing student records, courses, academic performance, and DSA search and sort demonstrations.">
+    <title>Student records | Northstar Campus</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="brand" href="#dashboard" aria-label="Northstar Campus home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><path d="M16 3.5 19.2 12.8 28.5 16l-9.3 3.2L16 28.5l-3.2-9.3L3.5 16l9.3-3.2L16 3.5Z"/><circle cx="16" cy="16" r="3.1"/></svg>
+          </span>
+          <span class="brand-text"><strong>northstar</strong><small>CAMPUS ADMIN</small></span>
+        </a>
+
+        <div class="sidebar-section-label">WORKSPACE</div>
+        <nav class="side-nav">
+          <a class="nav-link is-active" href="#dashboard" aria-current="page">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="5.5" height="5.5" rx="1.2"/><rect x="11.5" y="3" width="5.5" height="5.5" rx="1.2"/><rect x="3" y="11.5" width="5.5" height="5.5" rx="1.2"/><rect x="11.5" y="11.5" width="5.5" height="5.5" rx="1.2"/></svg>
+            <span>Overview</span>
+          </a>
+          <a class="nav-link" href="#students">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="7.2" cy="6.2" r="3"/><path d="M1.8 16.8c.5-3 2.4-4.7 5.4-4.7s4.9 1.7 5.4 4.7M13.1 3.7a3 3 0 0 1 0 5.8m1.2 2.8c2.3.5 3.5 2 3.9 4.5"/></svg>
+            <span>Students</span><span class="nav-count" id="nav-student-count">0</span>
+          </a>
+          <a class="nav-link" href="#insights">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 16.5V10m4.7 6.5V4m4.6 12.5V7m4.7 9.5V2.5"/></svg>
+            <span>Insights</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-section-label sidebar-section-spaced">ACADEMIC YEAR</div>
+        <div class="year-selector"><span class="year-dot"></span><span>2025 – 2026</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></div>
+
+        <div class="sidebar-bottom">
+          <div class="help-card">
+            <span class="help-spark" aria-hidden="true">✳</span>
+            <strong>Built for learning</strong>
+            <p>Explore how arrays, searching, and sorting power this roster.</p>
+            <a href="#algorithms">See the DSA concepts <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="sidebar-user"><span class="user-avatar">AD</span><span class="user-copy"><strong>Campus Admin</strong><small>Administrator</small></span><button class="user-menu" type="button" aria-label="Account menu">•••</button></div>
+        </div>
+      </aside>
+
+      <div class="main-column">
+        <header class="topbar">
+          <div class="breadcrumbs"><span>Workspace</span><span aria-hidden="true">/</span><strong>Overview</strong></div>
+          <div class="topbar-tools">
+            <label class="global-search" for="global-search">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.7" cy="8.7" r="5.7"/><path d="m13 13 4.2 4.2"/></svg>
+              <input id="global-search" type="search" placeholder="Search students…" autocomplete="off" aria-label="Search students">
+              <kbd>/</kbd>
+            </label>
+            <span class="topbar-divider" aria-hidden="true"></span>
+            <span class="today-label" id="today-label"></span>
+            <span class="topbar-avatar" aria-label="Campus Admin">AD</span>
+          </div>
+        </header>
+
+        <main id="main-content" class="content">
+          <section class="welcome-row" id="dashboard" aria-labelledby="welcome-title">
+            <div>
+              <p class="overline"><span class="live-dot"></span> YOUR CAMPUS AT A GLANCE</p>
+              <h1 id="welcome-title">Good morning, Admin <span class="wave" aria-hidden="true">✦</span></h1>
+              <p class="welcome-subtitle">Here’s what’s happening with your student records today.</p>
+            </div>
+            <button class="button button-primary" id="add-student-button" type="button">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg>
+              Add student
+            </button>
+          </section>
+
+          <section class="stats-grid" aria-label="Student overview statistics">
+            <article class="stat-card stat-card-featured">
+              <div class="stat-card-top"><span class="stat-label">Total students</span><span class="stat-icon stat-icon-blue" aria-hidden="true"><svg viewBox="0 0 20 20"><circle cx="7" cy="6" r="3"/><path d="M1.7 16.5c.4-3 2.3-4.5 5.3-4.5s4.9 1.5 5.3 4.5M13 4a3 3 0 0 1 0 5.7m1 2.5c2.4.5 3.7 2 4.1 4.3"/></svg></span></div>
+              <div class="stat-number-row"><strong class="stat-number" id="stat-total">0</strong><span class="stat-trend"><span aria-hidden="true">↗</span> Active roster</span></div>
+              <div class="stat-footnote">Enrolled across all programs</div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-card-top"><span class="stat-label">Active students</span><span class="stat-icon stat-icon-green" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m4 10.5 3.7 3.7L16.5 5.8"/></svg></span></div>
+              <div class="stat-number-row"><strong class="stat-number" id="stat-active">0</strong><span class="stat-context" id="active-rate">0% of roster</span></div>
+              <div class="mini-meter"><span id="active-meter"></span></div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-card-top"><span class="stat-label">Average score</span><span class="stat-icon stat-icon-violet" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M3 14.5 7.3 10l3 2.4 6.7-7"/><path d="M12.5 5.4H17v4.5"/></svg></span></div>
+              <div class="stat-number-row"><strong class="stat-number" id="stat-average">—</strong><span class="stat-context">Across all students</span></div>
+              <div class="mini-meter meter-violet"><span id="score-meter"></span></div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-card-top"><span class="stat-label">Programs</span><span class="stat-icon stat-icon-amber" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M3 5.5h14M3 10h14M3 14.5h8"/><circle cx="15.3" cy="14.5" r="1.7"/></svg></span></div>
+              <div class="stat-number-row"><strong class="stat-number" id="stat-programs">0</strong><span class="stat-context">Academic programs</span></div>
+              <div class="stat-footnote">Represented in this roster</div>
+            </article>
+          </section>
+
+          <section class="analytics-grid" id="insights" aria-label="Academic insights">
+            <article class="panel enrollment-panel">
+              <div class="panel-heading"><div><p class="panel-kicker">ROSTER DISTRIBUTION</p><h2>Students by year</h2></div><span class="panel-chip"><span class="chip-dot"></span> Current year</span></div>
+              <div class="bar-chart" id="year-chart" role="img" aria-label="Student counts by year of study"></div>
+              <div class="chart-legend"><span><i class="legend-current"></i> Students enrolled</span><span id="year-chart-total">0 students</span></div>
+            </article>
+            <article class="panel program-panel">
+              <div class="panel-heading"><div><p class="panel-kicker">PROGRAM MIX</p><h2>Top programs</h2></div><a class="subtle-link" href="#students">View roster <span aria-hidden="true">→</span></a></div>
+              <div class="program-list" id="program-list"></div>
+            </article>
+          </section>
+
+          <section class="panel roster-panel" id="students" aria-labelledby="roster-title">
+            <div class="roster-heading">
+              <div><div class="roster-title-row"><h2 id="roster-title">Student directory</h2><span class="roster-pill" id="roster-count">0</span></div><p>Manage enrollment details and academic progress.</p></div>
+              <div class="roster-actions"><button class="button button-outline" id="export-button" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v9m0 0 3.2-3.2M10 12 6.8 8.8M3.5 12.8v3.4c0 .6.5 1.1 1.1 1.1h10.8c.6 0 1.1-.5 1.1-1.1v-3.4"/></svg> Export</button><button class="button button-primary button-small" id="roster-add-button" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg> Add student</button></div>
+            </div>
+            <div class="table-toolbar">
+              <label class="table-search" for="table-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.7" cy="8.7" r="5.7"/><path d="m13 13 4.2 4.2"/></svg><input id="table-search" type="search" placeholder="Search by name, ID, email…" autocomplete="off"></label>
+              <label class="filter-select"><span class="visually-hidden">Search method</span><select id="search-mode" aria-label="Search method"><option value="linear">Linear search</option><option value="binary">Binary search · exact ID</option></select></label>
+              <label class="filter-select"><span class="visually-hidden">Filter by program</span><select id="course-filter" aria-label="Filter by program"><option value="">All programs</option></select></label>
+              <label class="filter-select filter-sort"><span class="visually-hidden">Sort records</span><select id="sort-key" aria-label="Sort records"><option value="name">Sort: Name</option><option value="id">Sort: Student ID</option><option value="course">Sort: Program</option><option value="year">Sort: Year</option><option value="score">Sort: Score</option></select></label>
+              <button class="sort-direction" id="sort-direction" type="button" aria-label="Sort ascending" title="Sort ascending"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 16V4m0 0L5.8 8.2M10 4l4.2 4.2"/></svg></button>
+            </div>
+            <div class="algorithm-note" id="algorithm-note" aria-live="polite">Showing the full roster. Sorting uses merge sort.</div>
+            <div class="table-scroll">
+              <table class="student-table">
+                <thead><tr><th scope="col">STUDENT</th><th scope="col">STUDENT ID</th><th scope="col">PROGRAM</th><th scope="col">YEAR</th><th scope="col">SCORE</th><th scope="col">STATUS</th><th scope="col"><span class="visually-hidden">Record actions</span></th></tr></thead>
+                <tbody id="student-rows"></tbody>
+              </table>
+              <div class="empty-state" id="empty-state" hidden><span class="empty-symbol" aria-hidden="true">⌕</span><h3 id="empty-title">No students found</h3><p id="empty-copy">Try changing your search or filters.</p><button class="subtle-link-button" id="clear-filters" type="button">Clear search and filters</button></div>
+            </div>
+            <div class="table-footer"><span id="showing-count">Showing 0 students</span><span><i class="saved-dot"></i> Changes save on this device</span></div>
+          </section>
+
+          <section class="dsa-section" id="algorithms" aria-labelledby="dsa-title">
+            <div class="dsa-heading"><div><p class="panel-kicker">LEARNING CORNER</p><h2 id="dsa-title">The DSA behind the dashboard</h2></div><p>Student records are stored and organized with core data structures and algorithms.</p></div>
+            <div class="dsa-grid">
+              <article class="dsa-card"><span class="dsa-icon dsa-icon-array" aria-hidden="true">[ ]</span><div><h3>Arrays</h3><p>A student array holds the roster. Add, edit, and delete actions update that collection.</p><small>Index access <b>O(1)</b></small></div></article>
+              <article class="dsa-card"><span class="dsa-icon dsa-icon-search" aria-hidden="true"><svg viewBox="0 0 20 20"><circle cx="8" cy="8" r="5"/><path d="m12 12 5 5"/></svg></span><div><h3>Searching</h3><p>Linear search checks all fields; binary search locates an exact ID in sorted data.</p><small>Linear <b>O(n)</b> · Binary <b>O(log n)</b></small></div></article>
+              <article class="dsa-card"><span class="dsa-icon dsa-icon-sort" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M4 5h12M6.5 10h7M9 15h2"/></svg></span><div><h3>Sorting</h3><p>Stable merge sort organizes the directory by name, ID, program, year, or score.</p><small>Merge sort <b>O(n log n)</b></small></div></article>
+            </div>
+          </section>
+          <footer class="page-footer"><span>Northstar Campus <span aria-hidden="true">·</span> Student records workspace</span><span>Student information system project</span></footer>
+        </main>
+      </div>
+    </div>
+
+    <dialog class="student-dialog" id="student-dialog" aria-labelledby="dialog-title">
+      <form id="student-form">
+        <div class="dialog-header"><div><p class="panel-kicker">STUDENT PROFILE</p><h2 id="dialog-title">Add student</h2></div><button class="dialog-close" id="close-dialog" type="button" aria-label="Close dialog">×</button></div>
+        <p class="dialog-copy">Add a student to the academic roster. All fields are required.</p>
+        <div class="form-grid">
+          <label class="form-field"><span>Student ID</span><input name="id" id="student-id" maxlength="24" required placeholder="e.g. 2026001" autocomplete="off"><small>Must be unique in this roster.</small></label>
+          <label class="form-field"><span>Full name</span><input name="name" id="student-name" maxlength="80" required placeholder="e.g. Aanya Sharma" autocomplete="name"></label>
+          <label class="form-field form-field-wide"><span>Email address</span><input name="email" id="student-email" type="email" maxlength="120" required placeholder="name@campus.edu" autocomplete="email"></label>
+          <label class="form-field"><span>Program</span><input name="course" id="student-course" maxlength="60" required placeholder="e.g. Computer Science"></label>
+          <label class="form-field"><span>Year of study</span><select name="year" id="student-year" required><option value="">Select year</option><option value="1">Year 1</option><option value="2">Year 2</option><option value="3">Year 3</option><option value="4">Year 4</option><option value="5">Year 5</option></select></label>
+          <label class="form-field"><span>Academic score <small>(0–100)</small></span><input name="score" id="student-score" type="number" min="0" max="100" step="0.1" required placeholder="e.g. 87.5"></label>
+          <label class="form-field"><span>Enrollment status</span><select name="status" id="student-status" required><option value="Active">Active</option><option value="On leave">On leave</option><option value="Inactive">Inactive</option></select></label>
+        </div>
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+        <div class="dialog-actions"><button class="button button-outline" id="cancel-dialog" type="button">Cancel</button><button class="button button-primary" type="submit" id="save-student">Save student</button></div>
+      </form>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
